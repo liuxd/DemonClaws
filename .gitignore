@@ -37,3 +37,4 @@ build/
 *.pid
 
 src/img
+Gemfile.lock

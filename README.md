@@ -6,6 +6,7 @@ Fetch the images from some websites.
 
 + [http://www.ali213.net](http://www.ali213.net)
 + [http://www.3dmgame.com](http://www.3dmgame.com)
++ [http://www.sc115.com/](http://www.sc115.com/)
 
 ### Installation
 

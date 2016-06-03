@@ -14,7 +14,8 @@ url_info = URI.parse url
 
 class_mapping = {
   "www.ali213.net" => "Ali213",
-  'www.3dmgame.com' => "Threedm"
+  'www.3dmgame.com' => "Threedm",
+  'www.sc115.com' => 'Sc115'
 }
 
 class_name = class_mapping[url_info.host]
@@ -40,3 +41,5 @@ require app + class_name
 cls = Object.const_get class_name.capitalize
 obj = cls.instance
 obj.run url, page_size, folder
+
+# end of this file.

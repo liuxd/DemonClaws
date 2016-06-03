@@ -2,6 +2,26 @@
 
 Fetch the images from some websites.
 
+### Website List
+
++ [http://www.ali213.net](http://www.ali213.net)
++ [http://www.3dmgame.com](http://www.3dmgame.com)
+
+### Installation
+
+```
+git clone git@github.com:liuxd/TitaniumDogEye.git
+cd TitaniumDogEye
+bundle install
+```
+
+### Usage
+
+```
+cd TitaniumDogEye/src
+./main.rb {url} {page_size} {image_foler_name}
+```
+
 ### Example
 
 ```

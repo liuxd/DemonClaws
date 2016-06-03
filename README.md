@@ -1,34 +1,10 @@
-X-Spider
-============
+# TitaniumDogEye
 
-> A customized crawler framework for `Ruby` and `Redis`.
+Fetch the images from some websites.
 
-## Requirements
-
-+ redis
-+ ruby
-
-## Usage
-
-#### Create Task
+### Example
 
 ```
-cd bin
-./scaffold.rb #your_task_name
-cd ../app
-# develop your task.You have to implement the two methods: init, handle
-```
-
-#### Add Task
-
-```
-cd bin
-./task.rb #your_task_name
-```
-
-#### Let's start!
-
-```
-cd bin
-./daemon.rb start
+./main.rb http://www.ali213.net/news/html/2015-8/171333.html 12 euro
+./main.rb http://www.3dmgame.com/news/201503/3463462.html 7 onepiece3
 ```

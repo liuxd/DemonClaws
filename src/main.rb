@@ -15,25 +15,34 @@ url_info = URI.parse url
 class_mapping = {
   "www.ali213.net" => "Ali213",
   'www.3dmgame.com' => "Threedm",
-  'www.sc115.com' => 'Sc115'
+  'www.sc115.com' => 'Sc115',
+  'dbm' => 'Dbm'
 }
 
 class_name = class_mapping[url_info.host]
 
-def download img_url, folder
+if !class_mapping.include? url_info.host
+  class_name = class_mapping[url]
+end
+
+def download img_url, folder, filename = nil
   if !File.exists? folder
     Dir.mkdir folder
   end
 
-  File.open(folder + File.basename(img_url), 'wb'){ |f|
+  if filename.nil?
+    filename = File.basename(img_url)
+  end
+
+  File.open(folder + filename, 'wb'){ |f|
     f.write(open(img_url).read)
   }
 end
 
-img_folder = $current_path + 'img/'
+$img_folder = $current_path + 'img/'
 
-if !File.exists? img_folder
-  Dir.mkdir img_folder
+if !File.exists? $img_folder
+  Dir.mkdir $img_folder
 end
 
 require app + class_name

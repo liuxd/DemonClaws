@@ -16,7 +16,8 @@ class_mapping = {
   "www.ali213.net" => "Ali213",
   'www.3dmgame.com' => "Threedm",
   'www.sc115.com' => 'Sc115',
-  'dbm' => 'Dbm'
+  'dbm' => 'Dbm',
+  'feblog' => 'FEBlog'
 }
 
 class_name = class_mapping[url_info.host]

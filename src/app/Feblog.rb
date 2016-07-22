@@ -10,9 +10,9 @@ class Feblog
     @@folder = folder
 
     url_list = [
-      # 'https://fireemblemblog.wordpress.com/sword-of-seals/official-art-2/',
-      # 'https://fireemblemblog.wordpress.com/blazing-sword/official-art/',
-      # 'https://fireemblemblog.wordpress.com/radiant-dawn/official-art-high-res/',
+      'https://fireemblemblog.wordpress.com/sword-of-seals/official-art-2/',
+      'https://fireemblemblog.wordpress.com/blazing-sword/official-art/',
+      'https://fireemblemblog.wordpress.com/radiant-dawn/official-art-high-res/',
       'https://fireemblemblog.wordpress.com/5-sacred-stones/official-art/'
     ]
 

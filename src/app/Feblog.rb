@@ -1,9 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
 
-# Get image from http://www.3dmgame.com.
-# eg: ./main.rb http://www.3dmgame.com/news/201503/3463462.html 7 onepiece3
-
 class Feblog
   @@instance = Feblog.new
   @@folder = ''

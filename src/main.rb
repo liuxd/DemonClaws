@@ -26,6 +26,7 @@ if !class_mapping.include? url_info.host
   class_name = class_mapping[url]
 end
 
+# Download Function
 def download img_url, folder, filename = nil
   if !File.exists? folder
     Dir.mkdir folder
@@ -36,7 +37,14 @@ def download img_url, folder, filename = nil
   end
 
   File.open(folder + filename, 'wb'){ |f|
-    f.write(open(img_url).read)
+    begin
+      data = open(img_url).read
+    rescue OpenURI::HTTPError
+    end
+
+    if !data.nil?
+      f.write(data)
+    end
   }
 end
 

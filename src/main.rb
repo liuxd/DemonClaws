@@ -37,6 +37,10 @@ def download img_url, folder, filename = nil
     filename = File.basename(img_url)
   end
 
+  if File.exists? folder + filename
+    return
+  end
+
   File.open(folder + filename, 'wb'){ |f|
     begin
       data = open(img_url).read

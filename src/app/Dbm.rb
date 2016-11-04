@@ -88,6 +88,11 @@ class Dbm
 
     doc.css('img.BDE_Image').each do |e|
       img_url = e.to_h['src']
+
+      if !img_url.include?("imgsrc.baidu.com")
+        next
+      end
+
       download img_url, $current_path + 'img/' + @@folder + '/' + k.to_s + '/', order.to_s + '.jpg'
       order += 1
     end

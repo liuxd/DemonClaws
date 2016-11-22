@@ -6,10 +6,12 @@ require 'open-uri'
 class Dbm
   @@instance = Dbm.new
   @@folder = ''
+  @@page_size = 1
   private_class_method :new
 
   def run url, page_size, folder
     @@folder = folder
+    @@page_size = page_size
 
     url_list = [
       'http://tieba.baidu.com/p/3809404549',
@@ -76,12 +78,17 @@ class Dbm
     k = 1
 
     url_list.each do |url|
-      handle Net::HTTP.get(URI(url)), k
+      handle url, k
       k += 1
     end
   end
 
-  def handle data, k
+  def handle url, k
+    if k < @@page_size.to_i
+      return
+    end
+
+    data = Net::HTTP.get(URI(url))
     doc = Nokogiri::HTML.parse data
 
     order = 1
@@ -89,7 +96,7 @@ class Dbm
     doc.css('img.BDE_Image').each do |e|
       img_url = e.to_h['src']
 
-      if !img_url.include?("imgsrc.baidu.com")
+      if img_url.length != 120
         next
       end
 

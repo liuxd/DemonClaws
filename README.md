@@ -1,4 +1,4 @@
-# TitaniumDogEye
+# DemonClaws
 
 Another simple crawler framework.
 

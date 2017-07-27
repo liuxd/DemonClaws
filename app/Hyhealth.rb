@@ -1,19 +1,19 @@
 require 'nokogiri'
 require 'open-uri'
+require 'sqlite3'
 
 class Hyhealth
   @@instance = Hyhealth.new
   @@folder = ''
+  @@db = ''
+
   private_class_method :new
 
   def run url = '', page_size = '', folder = ''
-
-    save "http://hyhealth.co.nz/?product-7207.html", '茱莉蔻'
-    exit
-    # @todo
-
     get_brand_list.each do |brand_url|
+      @@db = SQLite3::Database.new '/Users/allen/Downloads/product.db'
       handle_product_list(brand_url)
+      @@db.close
     end
   end
 
@@ -32,6 +32,7 @@ class Hyhealth
 
   def handle_product_list brand_url
     doc = Nokogiri::HTML.parse Net::HTTP.get(URI(brand_url))
+    brand_name = ''
 
     # get brand name
     doc.css('.info h1').each do |div|
@@ -66,7 +67,7 @@ class Hyhealth
     doc = Nokogiri::HTML.parse Net::HTTP.get(URI(product_url))
     name_cn = ''
     image_url = ''
-    types = []
+    types = [brand_name]
 
     doc.css('.goodsname').each do |e|
       name_cn = e.text
@@ -76,18 +77,37 @@ class Hyhealth
       image_url = e['bigpicsrc']
     end
 
-    p name_cn, image_url
-    # p data = Net::HTTP.get(URI(image_url))
-
     doc.css('.Navigation a').each do |e|
       if e.text != '首页'
         types.push e.text
       end
     end
 
-    p types
+    sql = 'INSERT INTO product_info (name_cn, image_url) VALUES ("' + name_cn + '","' + image_url +'")'
+    @@db.execute sql
+    product_id = @@db.last_insert_row_id
 
-    # @todo
+    download image_url, $current_path + 'img/hy/', product_id.to_s + '.jpg'
+
+    types.each do |type|
+      sql_query_tag = 'SELECT tag_id FROM tag_info WHERE tag_name = "' + type +'"'
+      stm = @@db.prepare sql_query_tag
+      rs = stm.execute
+      tag_id = ''
+
+      rs.each do |e|
+        tag_id = e[0].to_i
+      end
+
+      if tag_id == ''
+        sql_tag = 'INSERT INTO tag_info (tag_name) VALUES ("' + type +'")'
+        @@db.execute sql_tag
+        tag_id = @@db.last_insert_row_id
+      end
+
+      sql_map = 'INSERT INTO product_tag (product_id, tag_id) VALUES (' + product_id.to_s + ', ' + tag_id.to_s + ')'
+      @@db.execute sql_map
+    end
   end
 
   def self.instance

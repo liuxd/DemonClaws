@@ -14,6 +14,7 @@ class Hyhealth
       @@db = SQLite3::Database.new '/Users/allen/Downloads/product.db'
       handle_product_list(brand_url)
       @@db.close
+      sleep 1
     end
   end
 
@@ -86,8 +87,7 @@ class Hyhealth
     end
 
     sql = 'INSERT INTO product_info (name_cn, image_url) VALUES ("' + name_cn + '","' + image_url +'")'
-    @@db.execute sql
-    product_id = @@db.last_insert_row_id
+    product_id = db_insert sql
 
     download image_url, $current_path + 'img/hy/', product_id.to_s + '.jpg'
 
@@ -105,13 +105,17 @@ class Hyhealth
 
       if tag_id == ''
         sql_tag = 'INSERT INTO tag_info (tag_name) VALUES ("' + type +'")'
-        @@db.execute sql_tag
-        tag_id = @@db.last_insert_row_id
+        tag_id = db_insert sql_tag
       end
 
       sql_map = 'INSERT INTO product_tag (product_id, tag_id) VALUES (' + product_id.to_s + ', ' + tag_id.to_s + ')'
-      @@db.execute sql_map
+      db_insert sql_map
     end
+  end
+
+  def db_insert sql
+    @@db.execute sql
+    @@db.last_insert_row_id
   end
 
   def self.instance

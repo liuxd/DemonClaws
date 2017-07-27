@@ -39,6 +39,8 @@ class Hyhealth
       brand_name = div.text
     end
 
+    p brand_name
+
     # get product_url_list
     page_totel = doc.css('.pagernum a').children().length + 1
     url_base = brand_url.sub '.html', ''
@@ -98,6 +100,8 @@ class Hyhealth
       rs.each do |e|
         tag_id = e[0].to_i
       end
+
+      stm.close
 
       if tag_id == ''
         sql_tag = 'INSERT INTO tag_info (tag_name) VALUES ("' + type +'")'

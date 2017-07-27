@@ -18,7 +18,8 @@ class_mapping = {
   'www.sc115.com' => 'Sc115',
   'dbm' => 'Dbm',
   'feblog' => 'FEBlog',
-  'www.laravelpodcast.com' => 'laravel'
+  'www.laravelpodcast.com' => 'laravel',
+  'hy' => 'Hyhealth'
 }
 
 class_name = class_mapping[url_info.host]

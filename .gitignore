@@ -36,5 +36,5 @@ build/
 *.nohup
 *.pid
 
-src/img
+img/
 Gemfile.lock

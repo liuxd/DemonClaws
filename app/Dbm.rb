@@ -73,7 +73,8 @@ class Dbm
       'https://tieba.baidu.com/p/4843292979',
       'https://tieba.baidu.com/p/4955494816',
       'https://tieba.baidu.com/p/5024299402',
-      'https://tieba.baidu.com/p/5123938929'
+      'https://tieba.baidu.com/p/5123938929',
+      'https://tieba.baidu.com/p/5282551920'
     ]
 
     if !File.exists? $img_folder + folder
